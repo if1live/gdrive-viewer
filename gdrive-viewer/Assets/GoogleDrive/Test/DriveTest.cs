@@ -36,8 +36,8 @@ public class DriveTest : MonoBehaviour
 	{
 		initInProgress = true;
 
-		var clientId = "488206440345-qn4rods7p9tgqnrg1rb5r21ekigg811u.apps.googleusercontent.com";
-		var clientSecret = "bTAdDOYnMsZppcwCELvhjdB8";
+		var clientId = "897584417662-rnkgkl5tlpnsau7c4oc0g2jp08cpluom.apps.googleusercontent.com";
+		var clientSecret = "tGNLbYnrdRO2hdFmwJAo5Fbt";
 
 		drive = new GoogleDrive(new GoogleDriveTokenStorage_PlayerPrefs(clientId));
 		drive.ClientID = clientId;

@@ -28,3 +28,8 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# secret
+GoogleDriveSettings_Service.asset
+GoogleDriveSettings_Service.asset.meta
+oculussig_*
