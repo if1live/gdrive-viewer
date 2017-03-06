@@ -35,13 +35,14 @@ namespace Assets.Game {
 
         IEnumerator InitGoogleDrive() {
             SetInteractable(false);
-            
+
             drive = new GoogleDrive(settings);
             drive.ClientID = settings.ClientID;
             drive.ClientSecret = settings.ClientSecret;
             drive.Scopes = new string[] {
                 "https://www.googleapis.com/auth/drive.readonly",
                 "https://www.googleapis.com/auth/userinfo.email",
+                "https://www.googleapis.com/auth/drive.appdata",
             };
 
             var authorization = drive.Authorize();
