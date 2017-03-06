@@ -13,20 +13,28 @@ namespace Assets.Game {
 
         GoogleDrive drive;
 
-        bool initInProgress = false;
+        void SetInteractable(bool b) {
+            btn_download.interactable = b;
+        }
 
         void Start() {
             btn_download.onClick.AddListener(delegate
             {
                 StartCoroutine(FetchImage());
             });
-            btn_download.interactable = false;
 
             StartCoroutine(InitGoogleDrive());
         }
 
+        private void Update() {
+            // 기어VR 테스트 하려고 간단하게 만든거
+            if(Input.GetButtonDown("Fire1")) {
+                btn_download.onClick.Invoke();
+            }
+        }
+
         IEnumerator InitGoogleDrive() {
-            initInProgress = true;
+            SetInteractable(false);
             
             drive = new GoogleDrive(settings);
             drive.ClientID = settings.ClientID;
@@ -41,16 +49,16 @@ namespace Assets.Game {
 
             if (authorization.Current is Exception) {
                 Debug.LogWarning(authorization.Current as Exception);
-                initInProgress = false;
+                yield break;
             }
 
             Debug.Log("User Account: " + drive.UserAccount);
-            initInProgress = false;
-
-            btn_download.interactable = true;
+            SetInteractable(true);
         }
 
         IEnumerator FetchImage() {
+            SetInteractable(false);
+
             var list = drive.ListFilesByQueary("title = '828046078431727618_1.jpg'");
             yield return StartCoroutine(list);
             var files = GoogleDrive.GetResult<List<GoogleDrive.File>>(list);
@@ -69,6 +77,7 @@ namespace Assets.Game {
             tex.LoadImage(bytes);
 
             quadRenderer.material.mainTexture = tex;
+            SetInteractable(true);
         }
     }
 }
